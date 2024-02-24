@@ -1,0 +1,22 @@
+extends base.pug
+
+block content
+    if !loggedInUser.avatarUrl
+        span 😀
+    else if loggedInUser.avatarUrl.startsWith("http")
+        img(src=loggedInUser.avatarUrl, width="50", height="50").profile__link
+    else
+        img(src="/" + loggedInUser.avatarUrl, width="50", height="50").profile__link
+
+    form(method="POST", enctype="multipart/form-data").edit-profile__form
+        label(for="avatar") Avatar
+        input(type="file", name="avatar", id="avatar", accept="image/*")
+        input(placeholder="Name", name="name", value=loggedInUser.name, type="text", required)
+        input(placeholder="Email", name="email", value=loggedInUser.email, type="email", required)
+        input(placeholder="Username", name="username", value=loggedInUser.username, type="text", required)
+        input(placeholder="Location", name="location", value=loggedInUser.location, type="text", required)
+        input(type="submit", value="update profile")
+        if loggedInUser.socialOnly === false
+            hr
+            div.edit-profile__password
+               a(href="change-password") change password &rarr;
