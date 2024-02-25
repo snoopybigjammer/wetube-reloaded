@@ -18,10 +18,8 @@ header
                     a(href=`/users/${loggedInUser._id}`)
                         if !loggedInUser.avatarUrl
                             span 😀
-                        else if loggedInUser.socialOnly
-                            img(src=loggedInUser.avatarUrl, width="50", height="50")
                         else
-                            img(src="/" + loggedInUser.avatarUrl, width="50", height="50")
+                            img(src=loggedInUser.avatarUrl, width="50", height="50", crossorigin)
             else
                 li
                     a(href="/login") login
